@@ -25,12 +25,8 @@ int main(void){
     memset(str, 0, sizeof(str));
     recv(cd, str, sizeof(str),0);
     printf("Client Message: %s\n", str);
-
-
     // printf("%d\n", strcmp(str,"bye"));
     if(strcmp(str,"bye")==0) break;
-
-
     memset(str, 0, sizeof(str));
     printf("Enter a string: ");
     fgets(str, sizeof(str), stdin);

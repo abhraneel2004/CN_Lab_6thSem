@@ -23,8 +23,10 @@ int main(void){
   gen[strcspn(gen,"\n")] = '\0';
 
   int genl = strlen(gen), dwl = strlen(dw);
-  if (genl&(genl-1)!=0 || genl>dwl) return -1;
+  if (genl>dwl) return -1;
 
+  strcpy(cw,dw);
+  
   int i;
   for(i = dwl; i<(dwl+genl)-1; i++){
     *(dw+i) = '0';
@@ -32,7 +34,22 @@ int main(void){
   *(dw+i) = '\0';
   printf("Padded dw: %s\n", dw);
 
-  
+  while(strlen(dw)>=strlen(gen)){
+    if(dw[0]=='0'){
+      for(i=0; i<strlen(dw) -1 ; i++)
+        dw[i] = dw[i+1];
+      dw[strlen(dw)-1] = '\0';
+      continue;
+    }
+    for(i = 0; i<strlen(gen); i++){
+      int p = dw[i]^gen[i];
+      dw[i] = (p+'0');
+    }
+  }  
+  printf("dw: %s\n", dw);
+
+  strcat(cw,dw);
+  printf("cw: %s\n", cw);
 
   send(sd, cw, sizeof(cw), 0);
   send(sd, gen, sizeof(gen), 0);

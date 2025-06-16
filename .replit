@@ -66,3 +66,11 @@ pattern = "**/*.{c,h}"
 
 [languages.c.languageServer]
 start = "ccls"
+
+[[ports]]
+localPort = 8181
+externalPort = 80
+
+[[ports]]
+localPort = 8566
+externalPort = 3000
